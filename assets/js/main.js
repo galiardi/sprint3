@@ -55,20 +55,24 @@ function onSubmit(e) {
   printTenure(persona);
 }
 
+// Si es trabajador activo, muestra currentSalaryDiv y hasFamilyResponsibDiv
+// caso contrario los esconde y reestablece el valor del input hasFamilyResponsib a su valor por defecto ('no')
 function onIsActiveWorkerChange() {
-  if (isActiveWorker.value === 'sSIi') {
+  if (isActiveWorker.value === 'si') {
     currentSalaryDiv.removeAttribute('hidden');
     hasFamilyResponsibDiv.removeAttribute('hidden');
   } else {
     currentSalaryDiv.setAttribute('hidden', '');
     hasFamilyResponsibDiv.setAttribute('hidden', '');
-    hasFamilyResponsib.value = 'NO';
+    hasFamilyResponsib.value = 'no';
     onHasFamilyResponsibChange();
   }
 }
 
+// Si tiene cargas familiares, muestra el input numOfFamilyResponsib
+// caso contrario lo esconde y deja su valor en 0
 function onHasFamilyResponsibChange() {
-  if (hasFamilyResponsib.value === 'si' && isActiveWorker.value === 'SI') {
+  if (hasFamilyResponsib.value === 'si' && isActiveWorker.value === 'si') {
     numOfFamilyResponsibDiv.removeAttribute('hidden');
   } else {
     numOfFamilyResponsibDiv.setAttribute('hidden', '');
