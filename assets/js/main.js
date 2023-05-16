@@ -12,6 +12,9 @@ const {
   currentSalaryDiv,
   hasFamilyResponsibDiv,
   numOfFamilyResponsibDiv,
+  answerA,
+  answerB,
+  answerC,
 } = window;
 
 userForm.addEventListener('submit', onSubmit);
@@ -40,14 +43,15 @@ function onSubmit(e) {
     firstname: firstname.value,
     lastName: lastname.value,
     birthdate: birthdateObj,
-    isActiveWorker: isActiveWorker.value,
     hireDate: hireDateObj,
-    currentSalary: currentSalary.value,
+    isActiveWorker: isActiveWorker.value === 'si',
     prevSemesterSalary: prevSemesterSalary.value,
+    currentSalary: currentSalary.value,
     hasFamilyResponsib: hasFamilyResponsib.value,
     numOfFamilyResponsib: numOfFamilyResponsib.value,
   };
-  console.log(persona);
+
+  printPersona(persona);
 }
 
 function onIsActiveWorkerChange() {
@@ -63,7 +67,48 @@ function onIsActiveWorkerChange() {
 }
 
 function onHasFamilyResponsibChange() {
-  hasFamilyResponsib.value === 'si' && isActiveWorker.value === 'si'
-    ? numOfFamilyResponsibDiv.removeAttribute('hidden')
-    : numOfFamilyResponsibDiv.setAttribute('hidden', '');
+  if (hasFamilyResponsib.value === 'si' && isActiveWorker.value === 'si') {
+    numOfFamilyResponsibDiv.removeAttribute('hidden');
+  } else {
+    numOfFamilyResponsibDiv.setAttribute('hidden', '');
+    numOfFamilyResponsib.value = 0;
+  }
+}
+
+function printPersona(persona) {
+  const {
+    firstname,
+    lastName,
+    birthdate,
+    hireDate,
+    isActiveWorker,
+    prevSemesterSalary,
+    currentSalary,
+    hasFamilyResponsib,
+    numOfFamilyResponsib,
+  } = persona;
+
+  answerA.innerHTML = `
+  <p>Nombre: ${firstname} ${lastName}</p>
+
+  <p>Fecha de nacimiento: ${birthdate.toLocaleDateString()}</p>
+
+  <p>Fecha de ingreso a la organizacion: ${hireDate.toLocaleDateString()}</p>
+
+  <p>${isActiveWorker ? 'Es' : 'No es'} trabajador activo.</p>
+
+  <p>Sueldo del semestre anterior: ${
+    prevSemesterSalary || 'no registra salario en el semestre anterior'
+  }</p>
+
+  <p>Sueldo actual: ${isActiveWorker ? currentSalary : 'no corresponde'}</p>
+
+  <p>Cargas familiares: ${
+    isActiveWorker
+      ? hasFamilyResponsib
+        ? numOfFamilyResponsib
+        : 0
+      : 'no corresponde'
+  }</p>
+  `;
 }
