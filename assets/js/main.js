@@ -35,13 +35,13 @@ function onSubmit(e) {
   const [hireYear, hireMonth, hire_date] = hireDate.value.split('-');
   const hireDateObj = new Date(
     parseInt(hireYear),
-    parseInt(hireMonth),
+    parseInt(hireMonth) - 1,
     parseInt(hire_date)
   );
 
   const persona = {
     firstname: firstname.value,
-    lastName: lastname.value,
+    lastname: lastname.value,
     birthdate: birthdateObj,
     hireDate: hireDateObj,
     isActiveWorker: isActiveWorker.value === 'si',
@@ -52,6 +52,7 @@ function onSubmit(e) {
   };
 
   printPersona(persona);
+  printTenure(persona);
 }
 
 function onIsActiveWorkerChange() {
@@ -78,7 +79,7 @@ function onHasFamilyResponsibChange() {
 function printPersona(persona) {
   const {
     firstname,
-    lastName,
+    lastname,
     birthdate,
     hireDate,
     isActiveWorker,
@@ -89,7 +90,7 @@ function printPersona(persona) {
   } = persona;
 
   answerA.innerHTML = `
-  <p>Nombre: ${firstname} ${lastName}</p>
+  <p>Nombre: ${firstname} ${lastname}</p>
 
   <p>Fecha de nacimiento: ${birthdate.toLocaleDateString()}</p>
 
@@ -111,4 +112,56 @@ function printPersona(persona) {
       : 'no corresponde'
   }</p>
   `;
+}
+
+function printTenure(persona) {
+  const { firstname, lastname } = persona;
+  const { tenureDays, tenureMonths, tenureYears } = getTenure(persona);
+  answerB.innerHTML = `
+    <p>La permanencia de ${firstname} ${lastname} en la empresa es de ${tenureYears} anos, ${tenureMonths} ${
+    tenureMonths === 1 ? 'mes' : 'meses'
+  } y ${tenureDays} ${tenureDays === 1 ? 'dia' : 'dias'}</p>
+    `;
+}
+
+function getTenure(persona) {
+  const { hireDate } = persona;
+  const todayDate = new Date();
+  const tenureYears = todayDate.getFullYear() - hireDate.getFullYear();
+  const tenureMonths = todayDate.getMonth() - hireDate.getMonth();
+  const tenureDays = todayDate.getDate() - hireDate.getDate();
+
+  if (tenureDays < 0) {
+    tenureMonths -= 1;
+
+    // si el ano pasado fue bisiesto wasLeapYear es true
+    // Me interesa el ano pasado, no este ano, porque este dato me sera util por ejemplo si ingreso el 20-02-2022 y estamos a 15-02-2023. Si el ano pasado fue bisiesto tendre un dia mas trabajado, si este ano es bisiesto no importa porque aun no ha llegado.
+    const wasLeapYear = (todayDate.getFullYear() - 1) % 4 === 0;
+    const daysByMonths = [
+      31,
+      wasLeapYear ? 29 : 28,
+      31,
+      30,
+      31,
+      30,
+      31,
+      31,
+      30,
+      31,
+      30,
+      31,
+    ];
+    tenureDays = daysByMonths[todayDate.getMonth()] + tenureDays; // tenureDays es negativo
+  }
+
+  if (tenureMonths < 0) {
+    tenureYears -= 1;
+    tenureMonths = 12 + tenureMonths; // tenureMonths es negativo
+  }
+
+  return {
+    tenureDays,
+    tenureMonths,
+    tenureYears,
+  };
 }
