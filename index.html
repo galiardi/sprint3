@@ -13,54 +13,50 @@
     </header>
     <main>
       <section>
-        <form action="">
+        <form id="userForm">
           <div>
-            <label for="nameInput">nombre</label>
-            <input type="text" id="nameInput" />
+            <label for="name">nombre</label>
+            <input type="text" id="name" />
           </div>
           <div>
-            <label for="lastnameInput">apellido</label>
-            <input type="text" id="lastnameInput" />
+            <label for="lastname">apellido</label>
+            <input type="text" id="lastname" />
           </div>
           <div>
-            <label for="birthdateInput">fecha de nacimiento</label>
-            <input type="date" id="birthdateInput" />
+            <label for="birthdate">fecha de nacimiento</label>
+            <input type="date" id="birthdate" />
           </div>
           <div>
-            <label for="isActiveWorkerInput">trabajador activo</label>
-            <select name="tabajador activo" id="isActiveWorkerInput">
+            <label for="isActiveWorker">trabajador activo</label>
+            <select name="tabajador activo" id="isActiveWorker">
               <option>si</option>
-              <option>no</option>
+              <option selected="selected">no</option>
             </select>
           </div>
           <div>
-            <label for="hireDateInput"
-              >fecha de ingreso a la organización</label
-            >
-            <input type="date" id="hireDateInput" />
+            <label for="hireDate">fecha de ingreso a la organización</label>
+            <input type="date" id="hireDate" />
           </div>
           <div>
-            <label for="currentSalaryInput">sueldo actual</label>
-            <input type="number" id="currentSalaryInput" />
+            <label for="currentSalary">sueldo actual</label>
+            <input type="number" id="currentSalary" />
           </div>
           <div>
-            <label for="prevSemesterSalaryInput"
-              >sueldo semestre anterior</label
-            >
-            <input type="number" id="prevSemesterSalaryInput" />
+            <label for="prevSemesterSalary">sueldo semestre anterior</label>
+            <input type="number" id="prevSemesterSalary" />
           </div>
-          <div>
-            <label for="hasFamilyResponsibInput">cargas familiares</label>
-            <select name="cargas familiares" id="hasFamilyResponsibInput">
+          <div id="hasFamilyResponsibDiv" hidden>
+            <label for="hasFamilyResponsib">cargas familiares</label>
+            <select name="cargas familiares" id="hasFamilyResponsib">
               <option>si</option>
-              <option>no</option>
+              <option selected="selected">no</option>
             </select>
           </div>
-          <div>
-            <label for="numOfFamilyResponsibInput">
+          <div id="numOfFamilyResponsibDiv" hidden>
+            <label for="numOfFamilyResponsib">
               numero de cargas familiares
             </label>
-            <input type="number" id="numOfFamilyResponsibInput" />
+            <input type="number" id="numOfFamilyResponsib" />
           </div>
           <div>
             <button type="submit">enviar información</button>
