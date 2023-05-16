@@ -58,25 +58,25 @@ function onSubmit(e) {
 // Si es trabajador activo, muestra currentSalaryDiv y hasFamilyResponsibDiv
 // caso contrario los esconde y reestablece el valor del input hasFamilyResponsib a su valor por defecto ('no')
 function onIsActiveWorkerChange() {
-  if (isActiveWorker.value === 'si') {
+  if (isActiveWorker.value === 'SI') {
     currentSalaryDiv.removeAttribute('hidden');
     hasFamilyResponsibDiv.removeAttribute('hidden');
   } else {
     currentSalaryDiv.setAttribute('hidden', '');
     hasFamilyResponsibDiv.setAttribute('hidden', '');
-    hasFamilyResponsib.value = 'no';
+    hasFamilyResponsib.value = 'NO';
     onHasFamilyResponsibChange();
   }
 }
 
 // Si tiene cargas familiares, muestra el input numOfFamilyResponsib
-// caso contrario lo esconde y deja su valor en 0
+// caso contrario lo esconde y restablece su valor por defecto
 function onHasFamilyResponsibChange() {
-  if (hasFamilyResponsib.value === 'si' && isActiveWorker.value === 'si') {
+  if (hasFamilyResponsib.value === 'SI' && isActiveWorker.value === 'SI') {
     numOfFamilyResponsibDiv.removeAttribute('hidden');
   } else {
     numOfFamilyResponsibDiv.setAttribute('hidden', '');
-    numOfFamilyResponsib.value = 0;
+    numOfFamilyResponsib.value = '';
   }
 }
 
@@ -110,7 +110,7 @@ function printPersona(persona) {
 
   <p>Cargas familiares: ${
     isActiveWorker
-      ? hasFamilyResponsib
+      ? hasFamilyResponsib === 'SI'
         ? numOfFamilyResponsib
         : 0
       : 'no corresponde'
