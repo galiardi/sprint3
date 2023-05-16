@@ -1,1 +1,48 @@
 /* comienzo de css */
+body {
+    background-color: rgb(117, 197, 135); /* Color de fondo */
+}
+
+form {
+   margin: 0 auto; /* Centramos el formulario */
+   width: 250px;   /* Sin ancho no podemos centrar el formulario */
+   background-color: white; /* Color blanco para el formulario */
+   padding: 2px; /* separamos los bordes del form del resto de elementos */
+   border-radius: 10px; /* Redondeamos los bordes del form */
+}
+
+h1 {
+    color: rgb(0, 68, 255); /* Definimos el color del títuo */
+    margin: 0 auto; /* Centramos el título */
+    width: 250px;   /* Sin ancho no podemos centrar */
+    padding: 2px; /* separamos los bordes del form del resto de elementos */
+}
+
+input, textarea {
+    padding: 5px; /* Separamos la letra del interior (contenido) en los inputs de los bordes */
+}
+
+label {
+    display: block; /* Ahora los inputs quedan debajo de los label */
+    padding: 5px; /* Separando espacios internos */
+}
+
+li {
+    margin: 30px; /* dando márgenes a todos los elementos de la lista */
+}
+
+.btn{
+    margin-top: 20px; /* Damos un margen individual para el contenedor del botón */
+}
+
+button {
+    width: 40%; /* centramos el botón */
+    margin-left: 25%;
+    border-radius: 10px;
+}
+
+address {
+    margin: 0 auto; /* Centramos el pie */
+    width: 250px;
+    margin-top: 15px;
+}
