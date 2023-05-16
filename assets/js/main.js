@@ -1,6 +1,6 @@
 const {
   userForm,
-  name,
+  firstname,
   lastname,
   birthdate,
   isActiveWorker,
@@ -9,6 +9,7 @@ const {
   prevSemesterSalary,
   hasFamilyResponsib,
   numOfFamilyResponsib,
+  currentSalaryDiv,
   hasFamilyResponsibDiv,
   numOfFamilyResponsibDiv,
 } = window;
@@ -36,7 +37,7 @@ function onSubmit(e) {
   );
 
   const persona = {
-    name: name.value,
+    firstname: firstname.value,
     lastName: lastname.value,
     birthdate: birthdateObj,
     isActiveWorker: isActiveWorker.value,
@@ -51,8 +52,10 @@ function onSubmit(e) {
 
 function onIsActiveWorkerChange() {
   if (isActiveWorker.value === 'si') {
+    currentSalaryDiv.removeAttribute('hidden');
     hasFamilyResponsibDiv.removeAttribute('hidden');
   } else {
+    currentSalaryDiv.setAttribute('hidden', '');
     hasFamilyResponsibDiv.setAttribute('hidden', '');
     hasFamilyResponsib.value = 'no';
     onHasFamilyResponsibChange();

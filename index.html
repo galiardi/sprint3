@@ -15,17 +15,25 @@
       <section>
         <form id="userForm">
           <div>
-            <label for="name">nombre</label>
-            <input type="text" id="name" />
+            <label for="firstname">nombre</label>
+            <input type="text" id="firstname" />
           </div>
+
           <div>
             <label for="lastname">apellido</label>
             <input type="text" id="lastname" />
           </div>
+
           <div>
             <label for="birthdate">fecha de nacimiento</label>
             <input type="date" id="birthdate" />
           </div>
+
+          <div>
+            <label for="hireDate">fecha de ingreso a la organización</label>
+            <input type="date" id="hireDate" />
+          </div>
+
           <div>
             <label for="isActiveWorker">trabajador activo</label>
             <select name="tabajador activo" id="isActiveWorker">
@@ -33,18 +41,17 @@
               <option selected="selected">no</option>
             </select>
           </div>
-          <div>
-            <label for="hireDate">fecha de ingreso a la organización</label>
-            <input type="date" id="hireDate" />
-          </div>
-          <div>
-            <label for="currentSalary">sueldo actual</label>
-            <input type="number" id="currentSalary" />
-          </div>
+
           <div>
             <label for="prevSemesterSalary">sueldo semestre anterior</label>
             <input type="number" id="prevSemesterSalary" />
           </div>
+
+          <div id="currentSalaryDiv" hidden>
+            <label for="currentSalary">sueldo actual</label>
+            <input type="number" id="currentSalary" />
+          </div>
+
           <div id="hasFamilyResponsibDiv" hidden>
             <label for="hasFamilyResponsib">cargas familiares</label>
             <select name="cargas familiares" id="hasFamilyResponsib">
@@ -52,12 +59,14 @@
               <option selected="selected">no</option>
             </select>
           </div>
+
           <div id="numOfFamilyResponsibDiv" hidden>
             <label for="numOfFamilyResponsib">
               numero de cargas familiares
             </label>
             <input type="number" id="numOfFamilyResponsib" />
           </div>
+
           <div>
             <button type="submit">enviar información</button>
           </div>
