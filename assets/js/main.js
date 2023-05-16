@@ -44,7 +44,7 @@ function onSubmit(e) {
     lastName: lastname.value,
     birthdate: birthdateObj,
     hireDate: hireDateObj,
-    isActiveWorker: isActiveWorker.value === 'si',
+    isActiveWorker: isActiveWorker.value === 'SI',
     prevSemesterSalary: prevSemesterSalary.value,
     currentSalary: currentSalary.value,
     hasFamilyResponsib: hasFamilyResponsib.value,
@@ -55,19 +55,19 @@ function onSubmit(e) {
 }
 
 function onIsActiveWorkerChange() {
-  if (isActiveWorker.value === 'si') {
+  if (isActiveWorker.value === 'sSIi') {
     currentSalaryDiv.removeAttribute('hidden');
     hasFamilyResponsibDiv.removeAttribute('hidden');
   } else {
     currentSalaryDiv.setAttribute('hidden', '');
     hasFamilyResponsibDiv.setAttribute('hidden', '');
-    hasFamilyResponsib.value = 'no';
+    hasFamilyResponsib.value = 'NO';
     onHasFamilyResponsibChange();
   }
 }
 
 function onHasFamilyResponsibChange() {
-  if (hasFamilyResponsib.value === 'si' && isActiveWorker.value === 'si') {
+  if (hasFamilyResponsib.value === 'si' && isActiveWorker.value === 'SI') {
     numOfFamilyResponsibDiv.removeAttribute('hidden');
   } else {
     numOfFamilyResponsibDiv.setAttribute('hidden', '');
