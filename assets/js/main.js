@@ -20,9 +20,12 @@ const {
 userForm.addEventListener('submit', onSubmit);
 isActiveWorker.addEventListener('change', onIsActiveWorkerChange);
 hasFamilyResponsib.addEventListener('change', onHasFamilyResponsibChange);
-
+// Obtiene los datos ingresados por el usuario y limpia los resultados llamando a las demás funciones
 function onSubmit(e) {
   e.preventDefault();
+  answerA.innerHTML = "";
+  answerB.innerHTML = "";
+  answerC.innerHTML = "";
   const [birthdateYear, birthdateMonth, birthdateDate] =
     birthdate.value.split('-');
 
@@ -50,9 +53,13 @@ function onSubmit(e) {
     hasFamilyResponsib: hasFamilyResponsib.value,
     numOfFamilyResponsib: numOfFamilyResponsib.value,
   };
-
   printPersona(persona);
-  printTenure(persona);
+  if (persona.isActiveWorker){
+    printTenure(persona);
+    if (persona.hasFamilyResponsib === 'SI'){
+      printSalary(persona);
+    }
+  }
 }
 
 // Si es trabajador activo, muestra currentSalaryDiv y hasFamilyResponsibDiv
@@ -79,7 +86,7 @@ function onHasFamilyResponsibChange() {
     numOfFamilyResponsib.value = '';
   }
 }
-
+// Imprime los datos de la persona ingresada
 function printPersona(persona) {
   const {
     firstname,
@@ -117,17 +124,17 @@ function printPersona(persona) {
   }</p>
   `;
 }
-
+// Imprime el tiempo de la persona en la empresa
 function printTenure(persona) {
   const { firstname, lastname } = persona;
   const { tenureDays, tenureMonths, tenureYears } = getTenure(persona);
   answerB.innerHTML = `
-    <p>La permanencia de ${firstname} ${lastname} en la empresa es de ${tenureYears} anos, ${tenureMonths} ${
+    <p>La permanencia de ${firstname} ${lastname} en la empresa es de ${tenureYears} año(s), ${tenureMonths} ${
     tenureMonths === 1 ? 'mes' : 'meses'
   } y ${tenureDays} ${tenureDays === 1 ? 'dia' : 'dias'}</p>
     `;
 }
-
+// Retorna el tiempo de permanencia de la persona en la empresa
 function getTenure(persona) {
   const { hireDate } = persona;
   const todayDate = new Date();
@@ -168,4 +175,33 @@ function getTenure(persona) {
     tenureMonths,
     tenureYears,
   };
+}
+// Retorna el valor por carga familiar segun sueldo del semestre anterior
+function getFamilyAsignationValue(persona){
+  const prevSemesterSalary = parseInt(persona.prevSemesterSalary);
+  let familyAsignation;
+  if (prevSemesterSalary <= 429899){
+    familyAsignation = 20328;
+  }
+  else if (prevSemesterSalary > 429899 && prevSemesterSalary <= 627913 ){
+    familyAsignation = 12475;
+  }
+  else if (prevSemesterSalary > 627913 && prevSemesterSalary <= 979330 ){
+    familyAsignation = 3942;
+  }
+  else{
+    familyAsignation = 0 ;
+  }
+  return familyAsignation;
+}
+// Imprime el valor del sueldo final, dependiendo de la cantidad de cargas y el valor por carga
+// y el sueldo actual
+function printSalary(persona){
+  const familyAsignationValue = getFamilyAsignationValue(persona);
+  let totalAsignation = 0;
+  if (persona.hasFamilyResponsib === 'SI'){
+    totalAsignation = parseInt(persona.numOfFamilyResponsib) * familyAsignationValue;
+  }
+  let totalSalary = parseInt(persona.currentSalary) + totalAsignation;
+  answerC.innerHTML = `<p>La asignación por carga familiar es de: $${familyAsignationValue}</p> <p> El sueldo total con ${persona.numOfFamilyResponsib} carga es de : $${totalSalary}</p>`;
 }

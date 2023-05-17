@@ -46,3 +46,12 @@ address {
     width: 250px;
     margin-top: 15px;
 }
+
+section {
+    margin: 0 auto; /* Centramos el formulario */
+    width: 250px;   /* Sin ancho no podemos centrar el formulario */
+    background-color: white; /* Color blanco para el formulario */
+    padding: 2px; /* separamos los bordes del form del resto de elementos */
+    border-radius: 10px; /* Redondeamos los bordes del form */
+    margin-top: 20px;
+}
